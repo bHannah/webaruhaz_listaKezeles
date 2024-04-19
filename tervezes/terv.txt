@@ -8,8 +8,8 @@ aruMegjelenit()
 - az adatbázisból olvassa ki a cikkek tulajdonságait, és állítsa össze a kártyákat
 szuresNev()
 - ha keresünk egy cikket akkor betűre keresse meg a cikkek neveiben az egyezést
-rendezesKategoria()
-- rendezze kategóriákra a cikkeket
+szuresKategoria()
+- szűrje a cikket kategória név szerint ha keresünk a kereső mezőben
 rendezesAsc()
 - rendezze abc szerinti sorrendbe a cikkeket
 rendezesArNov()
