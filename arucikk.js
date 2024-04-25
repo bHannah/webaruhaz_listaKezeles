@@ -1,44 +1,44 @@
 export const arucikkLISTA = [
     {
-        nev: "arucikk",
-        kep: "kep.png",
-        kategoria: "kategoria",
-        leiras: 0,
-        ar: 10
+        nev: "Disney kastély",
+        kep: "/termekkepek/disneykastely.webp",
+        kategoria: "Disney",
+        leiras: "Disney kastélt legó",
+        ar: 399.99
     },
     {
-        nev: "",
-        kep: "",
-        kategoria: "",
-        leiras: "",
-        ar: ""
+        nev: "Ariel kastély",
+        kep: "/termekkepek/arielkastely.webp",
+        kategoria: "Disney",
+        leiras: "A kishableány, disney mese ",
+        ar: 199.99
     },
     {
-        nev: "",
-        kep: "",
-        kategoria: "",
+        nev: "Hot-Dog Autó",
+        kep: "/termekkepek/arielkastely.webp",
+        kategoria: "Lego Friends",
         leiras: "",
-        ar: ""
+        ar: 59.99
     },
     {
-        nev: "",
-        kep: "",
-        kategoria: "",
+        nev: "Barátok háza",
+        kep: "/termekkepek/friendshousoe.webp",
+        kategoria: "Lego Friends",
         leiras: "",
-        ar: ""
+        ar: 199.99
     },
     {
-        nev: "",
-        kep: "",
-        kategoria: "",
+        nev: "Húsvéti nyuszi",
+        kep: "/termekkepek/nyuszi.webp",
+        kategoria: "Lego Állatok",
         leiras: "",
-        ar: ""
+        ar: 49.99
     },
     {
-        nev: "",
-        kep: "",
-        kategoria: "",
+        nev: "Róka",
+        kep: "/termekkepek/roka.webp",
+        kategoria: "Lego Állatok",
         leiras: "",
-        ar: ""
+        ar: 59.99
     },
 ]

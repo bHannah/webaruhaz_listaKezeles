@@ -35,26 +35,22 @@
         </ul>
       </div>
     </nav>
-    <div class="container">
-      <div class="dropdown">
-        <button
-          type="button"
-          class="btn btn-light dropdown-toggle"
-          data-bs-toggle="dropdown"
-        >
-          Rendezési lehetőségek...
-        </button>
-        <ul class="dropdown-menu">
-          <li class="dropdown-item kattintas">Ár szerint növekvő</li>
-          <li class="dropdown-item kattintas">Ár szerint csökkenő</li>
-          <li class="dropdown-item kattintas">Abc sorrendben</li>
-        </ul>
-        <div class="mb-3 mt-3">
-          <label for="kereses" class="form-label">Keresés:</label>
-          <input type="text" class="form-control" id="kereses" placeholder="..." name="kereses">
+    <div class="row kereses">
+      <div class="col">
+        <select class="form-select">
+          <option>Rendezési lehetőségek...</option>
+          <option>Ár szerint növekvő</option>
+          <option>Ár szerint csökkenő</option>
+          <option>Abc sorrend szerint</option>
+        </select>
+      </div>
+        <div class="col">
+          <input type="text" class="form-control" id="kereses" placeholder="Keresés" name="kereses">
         </div>
       </div>
-      <article id="termekek"></article>
+      <article id="termekek">
+        
+      </article>
       <aside></aside>
     </div>
     <footer>
