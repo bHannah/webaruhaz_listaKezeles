@@ -12,7 +12,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
-    <header></header>
+    <header class="bg-dark">
+      <h2 class="text-light">Webáruház</h2>
+    </header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <div class="container-fluid">
         <ul class="navbar-nav">
@@ -23,9 +25,7 @@
             <a class="nav-link" href="kosar.html">Kosár</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="szemelyesadatok.html"
-              >Személyes Adatok</a
-            >
+            <a class="nav-link  active" href="szemelyesadatok.html">Személyes Adatok</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="admin.html">Admin</a>
@@ -33,8 +33,39 @@
         </ul>
       </div>
     </nav>
-    <article></article>
+    <article class="szemelyesadatok">
+      <form action="">
+        <div class="mb-3 mt-3">
+          <label for="email" class="form-label">Név:</label>
+          <input type="email" class="form-control" id="nev" placeholder="Ide írd a neved!" name="email">
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="Ide írd az email címed" name="email">
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="email" class="form-label">Város:</label>
+          <input type="email" class="form-control" id="email" placeholder="Város" name="email">
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="email" class="form-label">Utca, házszám:</label>
+          <input type="email" class="form-control" id="email" placeholder="Utca, házszám" name="email">
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="email" class="form-label">Telefonszám:</label>
+          <input type="email" class="form-control" id="email" placeholder="Telefonszám" name="email">
+        </div>
+        <div class="form-check mb-3">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="remember"> Elfogadom a felhasználási feltételeket
+          </label>
+        </div>
+        <button type="submit" class="btn btn-dark">Mehet!</button>
+      </form>
+    </article>
     <aside></aside>
-    <footer></footer>
+    <footer>
+      <p>A képek forrása a <a href="https://www.lego.com/en-us" target="_blank">lego.com</a> hivatalos weboldala.<br>Készítette: Both Orsolya</p>
+    </footer>
   </body>
 </html>

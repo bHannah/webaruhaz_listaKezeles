@@ -15,30 +15,30 @@ export const arucikkLISTA = [
     },
     {
         nev: "Hot-Dog Autó",
-        kep: "/termekkepek/arielkastely.webp",
+        kep: "/termekkepek/legosriendshotdogtruck.webp",
         kategoria: "Lego Friends",
-        leiras: "",
+        leiras: "Lego friends ht dog árus autó",
         ar: 59.99
     },
     {
         nev: "Barátok háza",
         kep: "/termekkepek/friendshousoe.webp",
         kategoria: "Lego Friends",
-        leiras: "",
+        leiras: "Lego friends barátok háza, Emily háza",
         ar: 199.99
     },
     {
         nev: "Húsvéti nyuszi",
         kep: "/termekkepek/nyuszi.webp",
         kategoria: "Lego Állatok",
-        leiras: "",
+        leiras: "Húsvéti nyuszi szobor pici répával",
         ar: 49.99
     },
     {
         nev: "Róka",
         kep: "/termekkepek/roka.webp",
         kategoria: "Lego Állatok",
-        leiras: "",
+        leiras: "Róka szobor, erdei róka, kicsi fával",
         ar: 59.99
     },
 ]
