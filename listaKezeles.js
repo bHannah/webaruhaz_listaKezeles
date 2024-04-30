@@ -9,7 +9,7 @@ export function aruMegjelenit(Lista){
         <h4 class="card-title">${elem.nev}</h4>
         <p class="card-text">${elem.kategoria}</p>
         <p class="card-text">${elem.leiras}</p>
-        <p class="card-text">${elem.ar}</p>
+        <p class="card-text">${elem.ar} €</p>
         <a href="#" class="btn btn-dark">Kosárba!</a>
         </div></div></div>`
     })
