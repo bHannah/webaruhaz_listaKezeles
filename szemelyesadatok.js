@@ -1,3 +1,4 @@
+// megpróbáltam $("#nev").value - val is de nem akarta leadni úgy a textfeldek értékét, mindenhol undefined-al tért vissza. (?)
 export function adatBekuldes(){
     const BEKULDES_ELEM = $("#bekuldesgomb");
     BEKULDES_ELEM.on("click", function konzolraIr(){

@@ -17,7 +17,7 @@ export const arucikkLISTA = [
         nev: "Hot-Dog Autó",
         kep: "/termekkepek/legosriendshotdogtruck.webp",
         kategoria: "Lego Friends",
-        leiras: "Lego friends ht dog árus autó",
+        leiras: "Lego friends hot dog árus autó",
         ar: 59.99
     },
     {
