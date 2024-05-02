@@ -1,8 +1,10 @@
 import { arucikkLISTA } from "./arucikk.js" 
-import { aruMegjelenit, kartyaMegjelenit, termekKorsarbaHelyezese, rendezes, rendezCsokkeno, rendezNovekvo } from "./listaKezeles.js"
+import { init, termekKorsarbaHelyezese, rendezes, szuresNev, termekKosarba, kosarMegjelenit } from "./listaKezeles.js"
 import { adatBekuldes } from "./szemelyesadatok.js"
 
-kartyaMegjelenit(aruMegjelenit(arucikkLISTA))
+init(arucikkLISTA)
 adatBekuldes();
 termekKorsarbaHelyezese();
 rendezes(arucikkLISTA);
+szuresNev(arucikkLISTA);
+kosarMegjelenit(termekKorsarbaHelyezese(arucikkLISTA));

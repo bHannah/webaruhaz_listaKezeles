@@ -5,7 +5,7 @@ export function aruMegjelenit(Lista){
         txt += `
         <div class="col-4 mt-3">
         <div class="p-5 card ">
-        <img class="card-img-top" src="${elem.kep}" alt="kép" style="height:250px; width:auto;">
+        <img class="card-img-top" src="${elem.kep}" alt="kép" style="max-height: 200px; width:auto;">
         <div class="card-body">
         <h4 class="card-title">${elem.nev}</h4>
         <p class="card-text">${elem.kategoria}</p>
@@ -45,17 +45,58 @@ export function rendezes(arucikkLISTA) {
     return LISTA.reverse();
   }
 
+export function init(LISTA){
+  kartyaMegjelenit(aruMegjelenit(LISTA));
+}
+
+export function szuresNev(LISTA){
+  const kELEM = $("#kereses");
+  kELEM.on("keyup", function(){
+    let keresett = kELEM.val();
+    init(szures(LISTA, keresett))
+  })
+};
+
+export function szures(lista, keresoSzoveg){
+  const szurt_LISTA = lista.filter(function (termek){
+    return termek.nev.toUpperCase().includes(keresoSzoveg.toUpperCase()) ||
+    termek.kategoria.toUpperCase().includes(keresoSzoveg.toUpperCase())
+  })
+  return szurt_LISTA
+}
+
 export function kartyaMegjelenit(txt){
     const ARTICLE_ELEM = $(".termekek");
     ARTICLE_ELEM.html(txt)
 }
 
-export function termekKorsarbaHelyezese(){
+
+// az id-t eléri és visszaadja, a lista kezelésével van a baj!
+export function termekKorsarbaHelyezese(arucikkLISTA){
     const KOSAR_ELEM = $("#kosar")
     const KOSARBA_GOMB_ELEM = $(".kosarbagomb");
-    KOSARBA_GOMB_ELEM.on("click", function(){
-
-        console.log(id)
+    console.log(arucikkLISTA)
+    KOSARBA_GOMB_ELEM.on("click", function(event){
+        const kattintott_ELEM = event.target;
+        let szam = kattintott_ELEM.id
+        console.log(szam)
+        termekKosarba(szam, arucikkLISTA)
     })
 }
-// el akarom érni annak az elemnek az id-ját amelyikre rákattintottam, és utána ennek az elemnek a listabeli értékeit kártyaként berakni a kosár id-vel ellátott elembe. 
+
+// ??? valszeg itt a baj de nem bizti, a lista undefined :(
+export function termekKosarba(szam, arucikkLISTA){
+  let txt = ""
+  if(szam > 0 && szam < 7){
+    txt += `<p>${arucikkLISTA.nev}</p>
+    <p>${arucikkLISTA.kategoria}</p>
+    <p>${arucikkLISTA.ar} €</p>`
+  }
+  return txt
+};
+
+// ez biztosan jó!
+export function kosarMegjelenit(txt){
+  const KOSARTARTALOM_ELEM = $("#kosartartalom")
+  KOSARTARTALOM_ELEM.html(txt)
+}
