@@ -1,24 +1,37 @@
+// árucikk kártyák, később article innerhtml-je
 export function aruMegjelenit(Lista){
     let txt = ""
     let szam = 1;
     Lista.forEach((elem, index) =>{
         txt += `
-        <div class="col-4 mt-3">
+        <div class="col-sm-6 col-md-4 mt-3">
         <div class="p-5 card ">
-        <img class="card-img-top" src="${elem.kep}" alt="kép" style="max-height: 200px; width:auto;">
+        <img class="card-img-top" src="${elem.kep}" alt="kép"">
         <div class="card-body">
         <h4 class="card-title">${elem.nev}</h4>
         <p class="card-text">${elem.kategoria}</p>
         <p class="card-text">${elem.leiras}</p>
         <p class="card-text">${elem.ar} €</p>
-        <a href="#" class="btn btn-dark kosarbagomb" id="${szam}">Kosárba!</a>
-
+        <button class="btn btn-dark kosarbagomb" id="${szam}">Kosárba!</button>
+        
         </div></div></div>`
         szam++;
-    })
-    return txt;
+      })
+      return txt;
+    }
+
+//előzetesen össyállított txt-t megjeleníti az article elemben
+export function kartyaMegjelenit(txt){
+  const ARTICLE_ELEM = $(".termekek");
+  ARTICLE_ELEM.html(txt)
 }
 
+//init fgv (ezt hivja az index.js)
+export function init(LISTA){
+  kartyaMegjelenit(aruMegjelenit(LISTA));
+}
+    
+//rendezések!
 export function rendezes(arucikkLISTA) {
     const rendezes_ELEM = $("#rendez");
     rendezes_ELEM.on("change", function () {
@@ -31,6 +44,7 @@ export function rendezes(arucikkLISTA) {
     })
   }
 
+  //ár szerint növekvő rendezéss
   export function rendezNovekvo(LISTA){
     LISTA.sort(function(t1, t2) {
       return t1.ar - t2.ar;
@@ -39,6 +53,7 @@ export function rendezes(arucikkLISTA) {
     
   }
 
+  //ár szerint csökkenő rendezés
   export function rendezCsokkeno(LISTA){
     LISTA.sort(function(t1, t2) {
         return t1.ar - t2.ar;
@@ -46,10 +61,17 @@ export function rendezes(arucikkLISTA) {
     return LISTA.reverse();
   }
 
-export function init(LISTA){
-  kartyaMegjelenit(aruMegjelenit(LISTA));
+  //Név szerint abc sorrend
+export function rendezesAbcSorrend(){
+
 }
 
+//Név szerint zyx sorrend
+export function rendezesZyxSorrend(){
+
+}
+
+//Név szerinti keresés 
 export function szuresNev(LISTA){
   const kELEM = $("#kereses");
   kELEM.on("keyup", function(){
@@ -66,18 +88,14 @@ export function szures(lista, keresoSzoveg){
   return szurt_LISTA
 }
 
-export function kartyaMegjelenit(txt){
-    const ARTICLE_ELEM = $(".termekek");
-    ARTICLE_ELEM.html(txt)
-}
 
+
+//termékek kosárba helyezése
 export function termekKorsarbaHelyezese(lista){
   const KOSARBA_GOMB_ELEM = $(".kosarbagomb");
   KOSARBA_GOMB_ELEM.on("click", function(event){
       const kattintottElem = event.target;
       const szam = kattintottElem.id;
-      console.log(szam)
-      console.log(kattintottElem)
       termekKosarba(szam, lista);
   });
 }
@@ -85,7 +103,6 @@ export function termekKorsarbaHelyezese(lista){
 export function termekKosarba(szam, lista) {
   const kosarTartalomElem = $("#kosartartalom");
   const kivalasztottTermek = lista[szam - 1];
-  console.log(kivalasztottTermek)
   const kosarElem = 
       `<div class="card mb-3">
           <div class="row g-0">
@@ -97,6 +114,7 @@ export function termekKosarba(szam, lista) {
                       <h5 class="card-title">${kivalasztottTermek.nev}</h5>
                       <p class="card-text">${kivalasztottTermek.leiras}</p>
                       <p class="card-text">${kivalasztottTermek.ar} €</p>
+                      <button class="btn btn-dark">ELtávolítás a kosárból!</button>
                   </div>
               </div>
           </div>
@@ -106,6 +124,27 @@ export function termekKosarba(szam, lista) {
   kosarTartalomElem.append(kosarElem);
 }
 
+//Amikor egy termékből többet akarunk venni mint egy, ez a fgv fogja számlálni és mellé írni a db számot
+export function mennyiseg(){
+
+}
+
+//A kosárból lehet elemet törölni
+export function eltavolitKosar(){
+
+}
+
+//amikor rákattintunk a megvásárolni kívánt darabszámot növeli eggyel
+export function mennyisegNovel(){
+
+}
+
+//amikor rákattintunk a megvásárolni kívánt darabszámot csökkenti eggyel
+export function mennyisegCsokkent(){
+
+}
+
+//kosár tartalmának végösszege
 export function vegOsszeg(){
   let vegosszeg;
     kosar.forEach(element => {
@@ -113,4 +152,9 @@ export function vegOsszeg(){
     });
     console.log(vegOsszeg)
     return vegosszeg;
+}
+
+// kosár tartalmának végösszegét jeleníti meg a kosár mellett
+export function megjelenitVegosszeg(){
+  
 }

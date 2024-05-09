@@ -18,41 +18,59 @@ A kiemelt termék mellett megjelenik egy bal és egy jobb léptető gomb, amivel
 
 # Függvények
 
-index:
-- árúcikkek kártyákra rendezve
-termekKorsarbaHelyezese()
-- ha az árúcikk kártáyján a "kosárba" gombra kattinunk, akkor a termék autómatikusan kerüljön a kosárba
-tartalomSzamlalo()
-- kosár mellett jelenjen meg egy szám pl.:(2) amely tájékoztat a kosár tartalmáról
-aruMegjelenit()
-- az adatbázisból olvassa ki a cikkek tulajdonságait, és állítsa össze a kártyákat
-szuresNev()
-- ha keresünk egy cikket akkor betűre keresse meg a cikkek neveiben az egyezést
-szuresKategoria()
-- szűrje a cikket kategória név szerint ha keresünk a kereső mezőben
-rendezesAsc()
-- rendezze abc szerinti sorrendbe a cikkeket
-rendezesArNov()
-- rendezze ár szerint növekvő sorrendbe a cikkeket
-rendezesArCsokk()
-- rendezze ár szerint csökkenő sorrendbe a cikkeket
+# index:
+- hívja meg az összes kész fgv-t
 
-admin felület:
+# listakezelés.js:
+aruMegjelenit(lista)
+- hozzon létre egy txt filet az article elembe fűzni kívánt innerhtml-el 
+kartyaMegjelenit(txt)
+- megkapja az aruMegjelenit() fgv álltal visszaadott txt-t és kirajzolja a weboldal article elemébe
+init(lista)
+- elméletileg a kész weboldalnál ay index.js csak ezt az fgv-t hívja
+
+rendezések:
+
+rendezes(lista):
+- megnézi hogy mi alapján szeretnénk rendezni és azt a fgv-t hívja meg
+rendezNovekvo(LISTA):
+- növekvő sorrendbe rendezi a lista elemeit
+rendezCsokkeno(LISTA):
+- csökkenő sorrendbe rendezi a lista elemeit
+rendezesAbcSorrend():
+- abc sorrend szerint rendezi az elemeket
+rendezesZyxSorrend():
+- zyx sorrend szerint rendezi az elemeket
+szures(lista, keresoSzoveg):
+- lekéri a keresőmezőbe beírt szöveget és megkeres minden olyan elemet a listában amellyel egyezést talál
+szuresNev(LISTA): 
+- az article elem innerhtml-jét szűkíti azokra az elemekre amelyeket a szures fgv-vel kapott
+termekKorsarbaHelyezese(lista):
+- hozzáad egy kattintás eseménykezelőt a kosárba gombokhoz és az adott elemre meghívja a termekKosarba fgv-t
+termekKosarba(szam, lista):
+- a kosár innerhtml-jéhez hozzáadja az adott termék kártyát
+mennyiseg():
+- ha egy adott elem már bent van a kosárban akkor csak a mennyiségét növeli, nem rakja be mégegyszer a teljes terméket
+eltavolitKosar():
+- ha az eltávolítás gombra kattintunk a teljes terméket kiveszi a kosárból
+mennyisegNovel():
+- ha rákattintunk a + gombra akkor az adott termék darabszámát növelje egyel
+mennyisegCsokkent()
+- ha rákattintunk a - gombra akkor az adott termék darabszámát csökkentse egyel
+vegOsszeg():
+- kiszámolja a kosár teljes tartalmának árát
+megjelenitVegosszeg(szam)
+- megjeleníti a kiszámolt végösszeget
+
+
+# admin felület:
+
 aruHozzaadasa()
 - árúcikk hozzáadása az adatbázishoz form kitöltés után
 aruEltavolit()
 - árúcikk eltávolítása az adatbázisból, kitörli a kártyát a termékek felületről
 
-személyes adatok: 
-- kell rá egy form amivel fel tud vinni a vevő adatokat
-szemelyHozzaadas()
-- ha a beküld gombra kattintunk akkor vegyen fel egy uj szemely objektumot a nev, kor, es lakcim adatokkal
+# személyes adatok: 
 
-kosár:
-- a termékek oldalról minden kattintott elem kerül ide amit a vevő meg szeretne vásárolni
-vegOsszeg()
-- kérje le az adott termékek árát és számolja ki a vásárlás végösszegét
-vegosszegKiir()
-- jelenitse meg a kiszámolt végösszeget a kosárba helyezett cikkek alatt
-kiKosarbol()
-- kattintásra szedje ki az árúcikket a kosárból, és hívja meg a végösszeg metódust mivel megváltozik a fizetendő összeg
+szemelyHozzaadas()
+- ha a beküld gombra kattintunk akkor kérje le a megadott adatokat és jelenítse meg a konzolon
