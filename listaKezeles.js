@@ -12,6 +12,7 @@ export function aruMegjelenit(Lista){
         <p class="card-text">${elem.leiras}</p>
         <p class="card-text">${elem.ar} €</p>
         <a href="#" class="btn btn-dark kosarbagomb" id="${szam}">Kosárba!</a>
+
         </div></div></div>`
         szam++;
     })
@@ -70,33 +71,46 @@ export function kartyaMegjelenit(txt){
     ARTICLE_ELEM.html(txt)
 }
 
-
-// az id-t eléri és visszaadja, a lista kezelésével van a baj!
-export function termekKorsarbaHelyezese(arucikkLISTA){
-    const KOSAR_ELEM = $("#kosar")
-    const KOSARBA_GOMB_ELEM = $(".kosarbagomb");
-    console.log(arucikkLISTA)
-    KOSARBA_GOMB_ELEM.on("click", function(event){
-        const kattintott_ELEM = event.target;
-        let szam = kattintott_ELEM.id
-        console.log(szam)
-        termekKosarba(szam, arucikkLISTA)
-    })
+export function termekKorsarbaHelyezese(lista){
+  const KOSARBA_GOMB_ELEM = $(".kosarbagomb");
+  KOSARBA_GOMB_ELEM.on("click", function(event){
+      const kattintottElem = event.target;
+      const szam = kattintottElem.id;
+      console.log(szam)
+      console.log(kattintottElem)
+      termekKosarba(szam, lista);
+  });
 }
 
-// ??? valszeg itt a baj de nem bizti, a lista undefined :(
-export function termekKosarba(szam, arucikkLISTA){
-  let txt = ""
-  if(szam > 0 && szam < 7){
-    txt += `<p>${arucikkLISTA.nev}</p>
-    <p>${arucikkLISTA.kategoria}</p>
-    <p>${arucikkLISTA.ar} €</p>`
-  }
-  return txt
-};
+export function termekKosarba(szam, lista) {
+  const kosarTartalomElem = $("#kosartartalom");
+  const kivalasztottTermek = lista[szam - 1];
+  console.log(kivalasztottTermek)
+  const kosarElem = 
+      `<div class="card mb-3">
+          <div class="row g-0">
+              <div class="col-md-4">
+                  <img src="${kivalasztottTermek.kep}" class="img-fluid rounded-start" style="width:200px;margin:10px;" alt="Termék képe">
+              </div>
+              <div class="col-md-8">
+                  <div class="card-body">
+                      <h5 class="card-title">${kivalasztottTermek.nev}</h5>
+                      <p class="card-text">${kivalasztottTermek.leiras}</p>
+                      <p class="card-text">${kivalasztottTermek.ar} €</p>
+                  </div>
+              </div>
+          </div>
+      </div>`
+  ;
 
-// ez biztosan jó!
-export function kosarMegjelenit(txt){
-  const KOSARTARTALOM_ELEM = $("#kosartartalom")
-  KOSARTARTALOM_ELEM.html(txt)
+  kosarTartalomElem.append(kosarElem);
+}
+
+export function vegOsszeg(){
+  let vegosszeg;
+    kosar.forEach(element => {
+        vegosszeg+=element.ar;
+    });
+    console.log(vegOsszeg)
+    return vegosszeg;
 }
