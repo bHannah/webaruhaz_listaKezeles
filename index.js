@@ -1,9 +1,4 @@
 import { arucikkLISTA } from "./arucikk.js" 
-import { init, termekKorsarbaHelyezese, rendezes, szuresNev } from "./listaKezeles.js"
-import { adatBekuldes } from "./szemelyesadatok.js"
+import { init } from "./listaKezeles.js"
 
 init(arucikkLISTA)
-termekKorsarbaHelyezese(arucikkLISTA);
-adatBekuldes();
-rendezes(arucikkLISTA);
-szuresNev(arucikkLISTA);

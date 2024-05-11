@@ -1,9 +1,16 @@
 // árucikk kártyák, később article innerhtml-je
-export function aruMegjelenit(Lista){
-    let txt = ""
-    let szam = 1;
-    Lista.forEach((elem, index) =>{
-        txt += `
+export function init(arucikkLISTA){
+  aruCikkMegjelenit(aruCikkTxt(arucikkLISTA));
+  rendezes(arucikkLISTA);
+  szuresNev(arucikkLISTA);
+  kosarhozAdas(arucikkLISTA);
+  torol(kosar);
+}
+export function aruCikkTxt(arucikkLISTA){
+    let arucikkek_txt = ""
+    let szam = 0;
+    arucikkLISTA.forEach((elem, index) =>{
+        arucikkek_txt += `
         <div class="col-sm-6 col-md-4 mt-3">
         <div class="p-5 card ">
         <img class="card-img-top" src="${elem.kep}" alt="kép"">
@@ -12,149 +19,124 @@ export function aruMegjelenit(Lista){
         <p class="card-text">${elem.kategoria}</p>
         <p class="card-text">${elem.leiras}</p>
         <p class="card-text">${elem.ar} €</p>
-        <button class="btn btn-dark kosarbagomb" id="${szam}">Kosárba!</button>
-        
+        <button class="btn btn-dark kosarbagomb" id=${szam}>Kosárba!</button>
         </div></div></div>`
-        szam++;
+        szam++
       })
-      return txt;
-    }
-
-//előzetesen össyállított txt-t megjeleníti az article elemben
-export function kartyaMegjelenit(txt){
+      return arucikkek_txt;
+}
+export function aruCikkMegjelenit(arucikkek_txt){
   const ARTICLE_ELEM = $(".termekek");
-  ARTICLE_ELEM.html(txt)
+  ARTICLE_ELEM.html(arucikkek_txt)
 }
-
-//init fgv (ezt hivja az index.js)
-export function init(LISTA){
-  kartyaMegjelenit(aruMegjelenit(LISTA));
-}
-    
-//rendezések!
 export function rendezes(arucikkLISTA) {
     const rendezes_ELEM = $("#rendez");
     rendezes_ELEM.on("change", function () {
       if ($("#rendez option:selected" ).val() === "1"){
-        kartyaMegjelenit(aruMegjelenit(rendezNovekvo(arucikkLISTA)));
+        aruCikkMegjelenit(aruCikkTxt(rendezNovekvo(arucikkLISTA)));
       }
       else if($("#rendez option:selected" ).val() === "2"){
-        kartyaMegjelenit(aruMegjelenit(rendezCsokkeno(arucikkLISTA)));
+        aruCikkMegjelenit(aruCikkTxt(rendezCsokkeno(arucikkLISTA)));
+      }
+      else if($("#rendez option:selected" ).val() === "3"){
+        aruCikkMegjelenit(aruCikkTxt(rendezesAbcSorrend(arucikkLISTA)));
+      }
+      else if($("#rendez option:selected" ).val() === "4"){
+        aruCikkMegjelenit(aruCikkTxt(rendezesZyxSorrend(arucikkLISTA)));
       }
     })
-  }
-
-  //ár szerint növekvő rendezéss
-  export function rendezNovekvo(LISTA){
+}
+export function rendezNovekvo(LISTA){
     LISTA.sort(function(t1, t2) {
       return t1.ar - t2.ar;
     });
     return LISTA;
     
-  }
-
-  //ár szerint csökkenő rendezés
-  export function rendezCsokkeno(LISTA){
+}
+export function rendezCsokkeno(LISTA){
     LISTA.sort(function(t1, t2) {
         return t1.ar - t2.ar;
       });
     return LISTA.reverse();
-  }
-
-  //Név szerint abc sorrend
-export function rendezesAbcSorrend(){
-
 }
-
-//Név szerint zyx sorrend
-export function rendezesZyxSorrend(){
-
+export function rendezesAbcSorrend(LISTA){
+  LISTA.sort((e1, e2) => {
+    const nevA = e1.nev.toUpperCase();
+    const nevB = e2.nev.toUpperCase();
+  
+    if (nevA < nevB) {
+      return -1;
+    }
+    if (nevA > nevB) {
+      return 1;
+    }
+  });
+  
+  return LISTA;
 }
-
-//Név szerinti keresés 
+export function rendezesZyxSorrend(LISTA){
+    LISTA.sort((e1, e2) => {
+      const nevA = e1.nev.toUpperCase();
+      const nevB = e2.nev.toUpperCase();
+    
+      if (nevA < nevB) {
+        return -1;
+      }
+      if (nevA > nevB) {
+        return 1;
+      }
+    });
+    
+    return LISTA.reverse();
+}
 export function szuresNev(LISTA){
   const kELEM = $("#kereses");
   kELEM.on("keyup", function(){
     let keresett = kELEM.val();
-    init(szures(LISTA, keresett))
+    aruCikkMegjelenit(aruCikkTxt(szures(LISTA, keresett)))
   })
-};
-
-export function szures(lista, keresoSzoveg){
-  const szurt_LISTA = lista.filter(function (termek){
+}
+export function szures(LISTA, keresoSzoveg){
+  const szurt_LISTA = LISTA.filter(function (termek){
     return termek.nev.toUpperCase().includes(keresoSzoveg.toUpperCase()) ||
     termek.kategoria.toUpperCase().includes(keresoSzoveg.toUpperCase())
   })
   return szurt_LISTA
 }
-
-
-
-//termékek kosárba helyezése
-export function termekKorsarbaHelyezese(lista){
-  const KOSARBA_GOMB_ELEM = $(".kosarbagomb");
-  KOSARBA_GOMB_ELEM.on("click", function(event){
-      const kattintottElem = event.target;
-      const szam = kattintottElem.id;
-      termekKosarba(szam, lista);
-  });
+const kosar = [];
+let vegosszeg = 0;
+export function kosarhozAdas(arucikkLISTA){
+  const GOMB_ELEM = $(".kosarbagomb")
+  GOMB_ELEM.on("click", function(event){
+    let jelenlegi = event.target
+    let szam = jelenlegi.id
+    kosarModosit(szam, arucikkLISTA)
+  })
+  return kosar
 }
-
-export function termekKosarba(szam, lista) {
-  const kosarTartalomElem = $("#kosartartalom");
-  const kivalasztottTermek = lista[szam - 1];
-  const kosarElem = 
-      `<div class="card mb-3">
-          <div class="row g-0">
-              <div class="col-md-4">
-                  <img src="${kivalasztottTermek.kep}" class="img-fluid rounded-start" style="width:200px;margin:10px;" alt="Termék képe">
-              </div>
-              <div class="col-md-8">
-                  <div class="card-body">
-                      <h5 class="card-title">${kivalasztottTermek.nev}</h5>
-                      <p class="card-text">${kivalasztottTermek.leiras}</p>
-                      <p class="card-text">${kivalasztottTermek.ar} €</p>
-                      <button class="btn btn-dark">ELtávolítás a kosárból!</button>
-                  </div>
-              </div>
-          </div>
-      </div>`
-  ;
-
-  kosarTartalomElem.append(kosarElem);
+export function kosarModosit(szam, arucikkLISTA){
+  kosar.push(arucikkLISTA[szam])
+  console.log(kosar)
+  kosarTxt(kosar)
 }
-
-//Amikor egy termékből többet akarunk venni mint egy, ez a fgv fogja számlálni és mellé írni a db számot
-export function mennyiseg(){
-
+export function kosarTxt(kosar){
+  let kosar_txt = ""
+  let szam = 0;
+  kosar.forEach((elem, index) =>{
+    kosar_txt+=`<p>${elem.nev}, ${elem.ar} <button class="btn btn-dark torol" id=${szam} >Törlés!</button></p>`;
+    szam++;
+  })
+  kosarKiir(kosar_txt)
 }
-
-//A kosárból lehet elemet törölni
-export function eltavolitKosar(){
-
+export function kosarKiir(txt){
+  const KOSAR_ELEM = $("#kosartartalom")
+  KOSAR_ELEM.html(txt)
 }
-
-//amikor rákattintunk a megvásárolni kívánt darabszámot növeli eggyel
-export function mennyisegNovel(){
-
-}
-
-//amikor rákattintunk a megvásárolni kívánt darabszámot csökkenti eggyel
-export function mennyisegCsokkent(){
-
-}
-
-//kosár tartalmának végösszege
-export function vegOsszeg(){
-  let vegosszeg;
-    kosar.forEach(element => {
-        vegosszeg+=element.ar;
-    });
-    console.log(vegOsszeg)
-    return vegosszeg;
-}
-
-// kosár tartalmának végösszegét jeleníti meg a kosár mellett
-export function megjelenitVegosszeg(){
-  
+export function torol(kosar){
+  const TOROL_GOMB = $(".torol")
+  TOROL_GOMB.on("click", function(event){
+    let jelenlegi = event.target
+    let szam = jelenlegi.id
+    console.log(szam) 
+  })
 }

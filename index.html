@@ -35,15 +35,17 @@
         </ul>
       </div>
     </nav>
-    <div class="row kereses">
-      <div class="col">
+    <div class="row-sm-12 kereses">
+      <div class="col-sm-12">
         <select name="rendez" id="rendez" class="form-select">
           <option value="0">Rendezési lehetőségek...</option>
           <option value="1">Ár szerint növekvő</option>
           <option value="2">Ár szerint csökkenő</option>
+          <option value="3">Abc sorrend szerint</option>
+          <option value="4">Abc sorrend szerint visszafelé</option>
         </select>
       </div>
-        <div class="col">
+        <div class="col" style="margin: 20px 0px;">
           <input type="text" class="form-control" id="kereses" placeholder="Keresés" name="kereses">
         </div>
       </div>
@@ -51,12 +53,10 @@
       <article class="termekek row d-flex justify-content-between">
         <h2>Termékek</h2>
       </article>
-      <div class="kosar col-md-8" id="kosar">
+      <div class="kosar col-md-8" style="padding:20px;" id="kosar">
         <h2>Kosár: </h2>
         <div id="kosartartalom">
-          
         </div>
-      </div>
     </div>
     <footer>
       <p>A képek forrása a <a href="https://www.lego.com/en-us" target="_blank">lego.com</a> hivatalos weboldala.<br>Készítette: Both Orsolya</p>
