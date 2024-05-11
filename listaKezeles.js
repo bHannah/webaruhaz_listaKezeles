@@ -1,10 +1,10 @@
-// árucikk kártyák, később article innerhtml-je
 export function init(arucikkLISTA){
   aruCikkMegjelenit(aruCikkTxt(arucikkLISTA));
   rendezes(arucikkLISTA);
   szuresNev(arucikkLISTA);
   kosarhozAdas(arucikkLISTA);
   torol(kosar);
+  
 }
 export function aruCikkTxt(arucikkLISTA){
     let arucikkek_txt = ""
@@ -103,34 +103,46 @@ export function szures(LISTA, keresoSzoveg){
   })
   return szurt_LISTA
 }
+
 const kosar = [];
-let vegosszeg = 0;
 export function kosarhozAdas(arucikkLISTA){
   const GOMB_ELEM = $(".kosarbagomb")
   GOMB_ELEM.on("click", function(event){
     let jelenlegi = event.target
     let szam = jelenlegi.id
     kosarModosit(szam, arucikkLISTA)
+    vegosszegSzamit(kosar);
   })
   return kosar
 }
 export function kosarModosit(szam, arucikkLISTA){
   kosar.push(arucikkLISTA[szam])
-  console.log(kosar)
   kosarTxt(kosar)
 }
 export function kosarTxt(kosar){
   let kosar_txt = ""
   let szam = 0;
   kosar.forEach((elem, index) =>{
-    kosar_txt+=`<p>${elem.nev}, ${elem.ar} <button class="btn btn-dark torol" id=${szam} >Törlés!</button></p>`;
+    kosar_txt+=`<p>${elem.nev}, ${elem.ar} €        <button class="btn btn-dark torol" id=${szam} >Törlés!</button></p>`;
     szam++;
   })
   kosarKiir(kosar_txt)
+
+}
+export function vegosszegSzamit(kosar){
+  let vegosszeg = 0;
+  for (let index = 0; index < kosar.length; index++) {
+    vegosszeg += kosar[index].ar
+  }
+  vegOsszegKiir(vegosszeg)
 }
 export function kosarKiir(txt){
   const KOSAR_ELEM = $("#kosartartalom")
   KOSAR_ELEM.html(txt)
+}
+export function vegOsszegKiir(vegosszeg){
+  const OSSZEG_ELEM = $('#vegosszeg')
+  OSSZEG_ELEM.html("Összesen: " + vegosszeg + " €")
 }
 export function torol(kosar){
   const TOROL_GOMB = $(".torol")
