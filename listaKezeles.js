@@ -1,10 +1,8 @@
 export function init(arucikkLISTA){
-  aruCikkMegjelenit(aruCikkTxt(arucikkLISTA));
+  aruCikkTxt(arucikkLISTA);
   rendezes(arucikkLISTA);
   szuresNev(arucikkLISTA);
-  kosarhozAdas(arucikkLISTA);
-  torol(kosar);
-  
+  kosarhozAdas(arucikkLISTA)
 }
 export function aruCikkTxt(arucikkLISTA){
     let arucikkek_txt = ""
@@ -23,9 +21,9 @@ export function aruCikkTxt(arucikkLISTA){
         </div></div></div>`
         szam++
       })
-      return arucikkek_txt;
+      aruCikkMegjelenit(arucikkek_txt, arucikkLISTA)
 }
-export function aruCikkMegjelenit(arucikkek_txt){
+export function aruCikkMegjelenit(arucikkek_txt, arucikkLISTA){
   const ARTICLE_ELEM = $(".termekek");
   ARTICLE_ELEM.html(arucikkek_txt)
 }
@@ -34,15 +32,19 @@ export function rendezes(arucikkLISTA) {
     rendezes_ELEM.on("change", function () {
       if ($("#rendez option:selected" ).val() === "1"){
         aruCikkMegjelenit(aruCikkTxt(rendezNovekvo(arucikkLISTA)));
+        kosarhozAdas(rendezNovekvo(arucikkLISTA))
       }
       else if($("#rendez option:selected" ).val() === "2"){
         aruCikkMegjelenit(aruCikkTxt(rendezCsokkeno(arucikkLISTA)));
+        kosarhozAdas(rendezCSokkeno(arucikkLISTA))
       }
       else if($("#rendez option:selected" ).val() === "3"){
         aruCikkMegjelenit(aruCikkTxt(rendezesAbcSorrend(arucikkLISTA)));
+        kosarhozAdas(rendezesAbcSorrend(arucikkLISTA))
       }
       else if($("#rendez option:selected" ).val() === "4"){
         aruCikkMegjelenit(aruCikkTxt(rendezesZyxSorrend(arucikkLISTA)));
+        kosarhozAdas(rendezesZyxSorrend(arucikkLISTA))
       }
     })
 }
@@ -94,6 +96,7 @@ export function szuresNev(LISTA){
   kELEM.on("keyup", function(){
     let keresett = kELEM.val();
     aruCikkMegjelenit(aruCikkTxt(szures(LISTA, keresett)))
+    kosarhozAdas(szures(LISTA, keresett))
   })
 }
 export function szures(LISTA, keresoSzoveg){
@@ -110,10 +113,11 @@ export function kosarhozAdas(arucikkLISTA){
   GOMB_ELEM.on("click", function(event){
     let jelenlegi = event.target
     let szam = jelenlegi.id
-    kosarModosit(szam, arucikkLISTA)
-    vegosszegSzamit(kosar);
+    if(!ellenorzes(arucikkLISTA, szam)){
+      kosarModosit(szam, arucikkLISTA)
+      vegosszegSzamit(kosar);
+    }
   })
-  return kosar
 }
 export function kosarModosit(szam, arucikkLISTA){
   kosar.push(arucikkLISTA[szam])
@@ -123,7 +127,7 @@ export function kosarTxt(kosar){
   let kosar_txt = ""
   let szam = 0;
   kosar.forEach((elem, index) =>{
-    kosar_txt+=`<p>${elem.nev}, ${elem.ar} €        <button class="btn btn-dark torol" id=${szam} >Törlés!</button></p>`;
+    kosar_txt+=`<p>${elem.nev}, ${elem.ar} € mennyiség: 1 db <button class="btn btn-dark torol" id=${szam} >Törlés!</button></p>`;
     szam++;
   })
   kosarKiir(kosar_txt)
@@ -137,8 +141,9 @@ export function vegosszegSzamit(kosar){
   vegOsszegKiir(vegosszeg)
 }
 export function kosarKiir(txt){
-  const KOSAR_ELEM = $("#kosartartalom")
-  KOSAR_ELEM.html(txt)
+  const KOSAR_ELEM = $("#kosartartalom");
+  KOSAR_ELEM.html(txt);
+  torol(kosar);
 }
 export function vegOsszegKiir(vegosszeg){
   const OSSZEG_ELEM = $('#vegosszeg')
@@ -149,6 +154,18 @@ export function torol(kosar){
   TOROL_GOMB.on("click", function(event){
     let jelenlegi = event.target
     let szam = jelenlegi.id
-    console.log(szam) 
+    kosar.splice(szam, 1);
+    kosarTxt(kosar)
+    vegosszegSzamit(kosar)
   })
+}
+export function ellenorzes(arucikkLISTA, szam){
+  let bennevan = false;
+  let keresettElem = arucikkLISTA[szam].nev;
+  for (let index = 0; index < kosar.length; index++) {
+    if (kosar[index].nev.includes(keresettElem)) {
+      bennevan = true
+    }
+  }
+  return bennevan
 }

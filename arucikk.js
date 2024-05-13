@@ -5,7 +5,8 @@ export const arucikkLISTA = [
         kategoria: "Disney",
         leiras: "Disney kastélt legó",
         ar: 399,
-        id: 0
+        id: 0,
+        menny: 1
     },
     {
         nev: "Ariel kastély",
@@ -13,7 +14,8 @@ export const arucikkLISTA = [
         kategoria: "Disney",
         leiras: "A kishableány, disney mese ",
         ar: 299,
-        id: 1
+        id: 1,
+        menny: 1
     },
     {
         nev: "Hot-Dog Autó",
@@ -21,7 +23,8 @@ export const arucikkLISTA = [
         kategoria: "Lego Friends",
         leiras: "Lego friends hot dog árus autó",
         ar: 69,
-        id: 2
+        id: 2,
+        menny: 1
     },
     {
         nev: "Barátok háza",
@@ -29,7 +32,8 @@ export const arucikkLISTA = [
         kategoria: "Lego Friends",
         leiras: "Lego friends barátok háza, Emily háza",
         ar: 199,
-        id: 3
+        id: 3,
+        menny: 1
     },
     {
         nev: "Húsvéti nyuszi",
@@ -37,7 +41,8 @@ export const arucikkLISTA = [
         kategoria: "Lego Állatok",
         leiras: "Húsvéti nyuszi szobor pici répával",
         ar: 49,
-        id: 4
+        id: 4,
+        menny: 1
     },
     {
         nev: "Róka",
@@ -45,6 +50,7 @@ export const arucikkLISTA = [
         kategoria: "Lego Állatok",
         leiras: "Róka szobor, erdei róka, kicsi fával",
         ar: 59,
-        id: 5
+        id: 5,
+        menny: 1
     },
 ]
