@@ -19,12 +19,13 @@ A kiemelt termék mellett megjelenik egy bal és egy jobb léptető gomb, amivel
 # Függvények
 
 # index:
-- hívja meg az összes kész fgv-t
+- hívja meg az összes kész fgv-t (init
+)
 
 # listakezelés.js:
-aruMegjelenit(lista)
+aruCikkTxt(arucikkLISTA)
 - hozzon létre egy txt filet az article elembe fűzni kívánt innerhtml-el 
-kartyaMegjelenit(txt)
+aruCikkMegjelenit(arucikkek_txt)
 - megkapja az aruMegjelenit() fgv álltal visszaadott txt-t és kirajzolja a weboldal article elemébe
 init(lista)
 - elméletileg a kész weboldalnál ay index.js csak ezt az fgv-t hívja
@@ -45,30 +46,26 @@ szures(lista, keresoSzoveg):
 - lekéri a keresőmezőbe beírt szöveget és megkeres minden olyan elemet a listában amellyel egyezést talál
 szuresNev(LISTA): 
 - az article elem innerhtml-jét szűkíti azokra az elemekre amelyeket a szures fgv-vel kapott
-termekKorsarbaHelyezese(lista):
-- hozzáad egy kattintás eseménykezelőt a kosárba gombokhoz és az adott elemre meghívja a termekKosarba fgv-t
-termekKosarba(szam, lista):
-- a kosár innerhtml-jéhez hozzáadja az adott termék kártyát
+kosarhozAdas(arucikkLISTA):
+- hozzáad egy kattintás eseménykezelőt a kosárba gombokhoz és az adott elemre meghívja a modositó fgv-t
+kosarModosit(szam, arucikkLISTA):
+- a kosar listához hozzáfűzi a kattintott elemet ha az még nincs benne
+kosarTxt(kosar):
+- létrehozza a kosár txt fájlját a kosar lista tartalma alapján
+kosarKiir(txt):
+- a létrehozott txt-t belerakja a kosartartalom id-ju divbe
 mennyiseg():
 - ha egy adott elem már bent van a kosárban akkor csak a mennyiségét növeli, nem rakja be mégegyszer a teljes terméket
-eltavolitKosar():
+torol(kosar):
 - ha az eltávolítás gombra kattintunk a teljes terméket kiveszi a kosárból
+vegosszegSzamit(kosar):
+- kiszámolja a kosár teljes tartalmának árát
+vegOsszegKiir(vegosszeg):
+- megjeleníti a kiszámolt végösszeget
 mennyisegNovel():
 - ha rákattintunk a + gombra akkor az adott termék darabszámát növelje egyel
 mennyisegCsokkent()
 - ha rákattintunk a - gombra akkor az adott termék darabszámát csökkentse egyel
-vegOsszeg():
-- kiszámolja a kosár teljes tartalmának árát
-megjelenitVegosszeg(szam)
-- megjeleníti a kiszámolt végösszeget
-
-
-# admin felület:
-
-aruHozzaadasa()
-- árúcikk hozzáadása az adatbázishoz form kitöltés után
-aruEltavolit()
-- árúcikk eltávolítása az adatbázisból, kitörli a kártyát a termékek felületről
 
 # személyes adatok: 
 

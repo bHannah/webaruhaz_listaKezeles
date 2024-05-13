@@ -21,9 +21,9 @@ export function aruCikkTxt(arucikkLISTA){
         </div></div></div>`
         szam++
       })
-      aruCikkMegjelenit(arucikkek_txt, arucikkLISTA)
+      aruCikkMegjelenit(arucikkek_txt)
 }
-export function aruCikkMegjelenit(arucikkek_txt, arucikkLISTA){
+export function aruCikkMegjelenit(arucikkek_txt){
   const ARTICLE_ELEM = $(".termekek");
   ARTICLE_ELEM.html(arucikkek_txt)
 }
