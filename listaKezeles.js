@@ -21,9 +21,9 @@ export function aruCikkTxt(arucikkLISTA){
         </div></div></div>`
         szam++
       })
-      aruCikkMegjelenit(arucikkek_txt)
+      aruCikkMegjelenit(arucikkek_txt, arucikkLISTA)
 }
-export function aruCikkMegjelenit(arucikkek_txt){
+export function aruCikkMegjelenit(arucikkek_txt, arucikkLISTA){
   const ARTICLE_ELEM = $(".termekek");
   ARTICLE_ELEM.html(arucikkek_txt)
 }
@@ -116,6 +116,14 @@ export function kosarhozAdas(arucikkLISTA){
     if(!ellenorzes(arucikkLISTA, szam)){
       kosarModosit(szam, arucikkLISTA)
       vegosszegSzamit(kosar);
+    }else{
+      for (let index = 0; index < kosar.length; index++) {
+        if (kosar[index].nev === arucikkLISTA[szam].nev){
+          kosar[index].menny += 1 
+          vegosszegSzamit(kosar);
+          kosarTxt(kosar)
+        }
+      } 
     }
   })
 }
@@ -127,7 +135,7 @@ export function kosarTxt(kosar){
   let kosar_txt = ""
   let szam = 0;
   kosar.forEach((elem, index) =>{
-    kosar_txt+=`<p>${elem.nev}, ${elem.ar} € mennyiség: 1 db <button class="btn btn-dark torol" id=${szam} >Törlés!</button></p>`;
+    kosar_txt+=`<p>${elem.nev}, ${elem.ar} € mennyiség: ${elem.menny} db <button class="btn btn-dark torol" id=${szam} >Törlés!</button></p>`;
     szam++;
   })
   kosarKiir(kosar_txt)
@@ -136,7 +144,7 @@ export function kosarTxt(kosar){
 export function vegosszegSzamit(kosar){
   let vegosszeg = 0;
   for (let index = 0; index < kosar.length; index++) {
-    vegosszeg += kosar[index].ar
+    vegosszeg += (kosar[index].ar*kosar[index].menny)
   }
   vegOsszegKiir(vegosszeg)
 }
@@ -154,6 +162,7 @@ export function torol(kosar){
   TOROL_GOMB.on("click", function(event){
     let jelenlegi = event.target
     let szam = jelenlegi.id
+    kosar[szam].menny = 1; 
     kosar.splice(szam, 1);
     kosarTxt(kosar)
     vegosszegSzamit(kosar)
